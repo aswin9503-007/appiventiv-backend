@@ -1,8 +1,8 @@
 const express =require("express");
 const cors = require("cors");
-const dontenv = require("dotenv");
+const dotenv = require("dotenv");
 
-dontenv.config();
+dotenvtenv.config();
 
 const app = express();
 
