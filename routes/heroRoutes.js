@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const {getHeroContent} = require("../controllers/heroController")
+const {getHero, updateHero} = require("../controllers/heroController")
 
-router.get("/hero", getHeroContent)
+router.get("/", getHero);
+router.put("/", updateHero); // Use PUT for updating existing data
 
 
 // Test Route for DB connection

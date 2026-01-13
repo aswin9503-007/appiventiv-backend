@@ -6,10 +6,15 @@ dotenv.config();
 
 const app = express();
 
+//Middleware
 app.use(cors());
 app.use(express.json());
 
-app.use("/api", require("./routes/heroRoutes"));
+// Hero Route
+app.use("/api/hero", require("./routes/heroRoutes"));
+
+// TrustSection Route
+app.use("/api/trust", require("./routes/trustSectionRoutes"));
 
 app.get("/", (req, res) => {
   res.send("Appinventiv Backend is running...");
