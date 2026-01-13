@@ -16,6 +16,9 @@ app.use("/api/hero", require("./routes/heroRoutes"));
 // TrustSection Route
 app.use("/api/trust", require("./routes/trustSectionRoutes"));
 
+//StatsSection Route
+app.use("/api/stats", require("./routes/statsRoutes"));
+
 app.get("/", (req, res) => {
   res.send("Appinventiv Backend is running...");
 });
