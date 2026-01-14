@@ -1,15 +1,23 @@
 const { Pool } = require('pg');
-require('dotenv').config();
+
+// Only try to load dotenv if we are NOT on Vercel
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+    console.error("❌ ERROR: DATABASE_URL is not defined in Environment Variables!");
+}
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    // This allows the serverless function to connect securely to Neon
-    rejectUnauthorized: false 
-  }
+    connectionString: connectionString,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
-// Use this for simple query execution
 module.exports = {
-  query: (text, params) => pool.query(text, params),
+    query: (text, params) => pool.query(text, params),
 };

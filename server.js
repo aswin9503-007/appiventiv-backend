@@ -1,33 +1,35 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv"); 
-
-dotenv.config();
+require("dotenv").config(); // Simpler import
 
 const app = express();
 
-//Middleware
-app.use(cors());
+// 1. Improved CORS for Vercel
+app.use(cors({
+  origin: "https://web-development-practice-six.vercel.app",
+  credentials: true
+}));
+
 app.use(express.json());
 
-// Hero Route
-app.use("/api/hero", require("./routes/heroRoutes"));
-
-// TrustSection Route
-app.use("/api/trust", require("./routes/trustSectionRoutes"));
-
-//StatsSection Route
-app.use("/api/stats", require("./routes/statsRoutes"));
-
+// 2. Health Check Route
 app.get("/", (req, res) => {
   res.send("Appinventiv Backend is running...");
 });
 
+// 3. Routes - Double check these filenames match EXACTLY (Case-Sensitive!)
+app.use("/api/hero", require("./routes/heroRoutes"));
+app.use("/api/trust", require("./routes/trustSectionRoutes"));
+app.use("/api/stats", require("./routes/statsRoutes"));
+
+// 4. Vercel doesn't need app.listen() to be wrapped in an IF block 
+// but it's good practice for local dev. This is the correct way:
+const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV !== 'production') {
-    const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
     });
 }
 
+// 5. CRITICAL: Export for Vercel
 module.exports = app;
