@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 app.use("/api/hero", require("./routes/heroRoutes"));
 app.use("/api/trust", require("./routes/trustSectionRoutes"));
 app.use("/api/stats", require("./routes/statsRoutes"));
+app.use("/api/cta", require("./routes/ctaRoutes"));
 
 // 4. Vercel doesn't need app.listen() to be wrapped in an IF block 
 // but it's good practice for local dev. This is the correct way:
