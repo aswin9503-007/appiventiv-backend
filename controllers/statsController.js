@@ -1,4 +1,4 @@
-const pool = require("../db");
+const pool = require("../db/index");
 
 // READ: Get all stats sorted by order
 exports.getAllStats = async (req, res) => {
